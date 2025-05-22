@@ -225,57 +225,90 @@ body {
 /* Main container for the HORIZONTAL row of GIFs */
 .gif-wrapper {
     display: flex;
-    flex-wrap: wrap; /* Allows GIFs to wrap to the next line on very small screens if needed */
-    justify-content: center; /* Centers the row of GIFs if they don't fill the full width */
-    gap: 15px; /* Space between each GIF item. Adjust as needed. */
+    /* Changed from flex-wrap: wrap; to nowrap to keep label and GIFs in one line */
+    flex-wrap: nowrap; 
+    /* Added align-items to vertically center the label and GIFs */
+    align-items: center; 
+    /* Changed from justify-content: center; to flex-start to align from left */
+    justify-content: flex-start; 
+    gap: 15px; /* Space between each GIF item and label. Adjust as needed. */
     padding: 2px 0; /* Vertical padding for the section */
-  }
+}
   
+.method-label {
+    /* Fixed width but NO fixed height */
+    width: 80px;
+    
+    /* Center the text both vertically and horizontally */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Text styling */
+    font-weight: bold;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+    
+    /* Prevent shrinking */
+    flex: 0 0 80px;
+}
+
   /* Individual GIF item container in the HORIZONTAL row */
   .gif-wrapper .gif-item {
-    flex: 1 1 150px; /* Flex-grow, flex-shrink, flex-basis. GIFs will try to be ~150px. Adjust basis. */
-    /* For 5 items, max-width is 20%. Subtract gap influence: (total_gap_width / num_items) */
-    /* Total gap for 5 items with 15px gap = 4 gaps * 15px = 60px. Per item contribution = 60px / 5 = 12px */
-    max-width: calc(20% - 12px);
-    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-    background-color: #dff5e5; /* Light background for the item box */
-    border-radius: 8px; /* Rounded corners for the item box */
-    padding: 10px; /* Padding around the GIF image within its box */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for the item box */
-    display: flex; /* Helps in centering the image if it's smaller than the padded box */
-    align-items: center; /* Vertically centers the image if it's smaller */
-    justify-content: center; /* Horizontally centers the image if it's smaller */
+    /* Adjusted flex properties and max-width for 5 items + label */
+    flex: 1 1 0; /* Allows items to grow and shrink equally, from a basis of 0 */
+    /* 
+      Calculation for max-width:
+      - 100% is the total width of .gif-wrapper.
+      - 120px is the width of .method-label.
+      - 10px is the margin-right of .method-label.
+      - (4 * 15px) = 60px is the total gap between 5 GIF items.
+      - So, (100% - 120px - 10px - 60px) / 5
+      - This calculation might be too complex for direct CSS, better to rely on flex-grow.
+      - A simpler approach for max-width if needed, or let flexbox handle it.
+      - For simplicity, let's make them try to be equal, flex handles the rest.
+    */
+    max-width: calc((100% - 120px - 10px - (4 * 15px)) / 5); /* Distribute remaining space among 5 GIFs */
+    box-sizing: border-box; 
+    background-color: #dff5e5; 
+    border-radius: 8px; 
+    padding: 10px; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
   }
 
   .gif-wrapper .gif-item-wrong {
-    flex: 1 1 150px; /* Flex-grow, flex-shrink, flex-basis. GIFs will try to be ~150px. Adjust basis. */
-    /* For 5 items, max-width is 20%. Subtract gap influence: (total_gap_width / num_items) */
-    /* Total gap for 5 items with 15px gap = 4 gaps * 15px = 60px. Per item contribution = 60px / 5 = 12px */
-    max-width: calc(20% - 12px);
-    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-    background-color: #eed4d4; /* Light background for the item box */
-    border-radius: 8px; /* Rounded corners for the item box */
-    padding: 10px; /* Padding around the GIF image within its box */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for the item box */
-    display: flex; /* Helps in centering the image if it's smaller than the padded box */
-    align-items: center; /* Vertically centers the image if it's smaller */
-    justify-content: center; /* Horizontally centers the image if it's smaller */
+    /* Adjusted flex properties and max-width, same as .gif-item */
+    flex: 1 1 0; 
+    max-width: calc((100% - 120px - 10px - (4 * 15px)) / 5); /* Distribute remaining space among 5 GIFs */
+    box-sizing: border-box; 
+    background-color: #eed4d4; 
+    border-radius: 8px; 
+    padding: 10px; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
   }
   
   /* Styling for the <img> (GIF) element itself */
-  .gif-wrapper .gif-item img {
-    max-width: 100%;        /* GIF is responsive within its .gif-item container's padding */
-    max-height: 256px;      /* Your requested max height for the GIF */
-    height: auto;           /* Maintain aspect ratio */
-    border-radius: 4px;     /* Slightly rounded corners for the GIF image itself */
-    display: block;         /* Good practice for images */
-    
-  }
+  .gif-wrapper .gif-item img,
+.gif-wrapper .gif-item-wrong img { /* Applied to both correct and wrong items */
+  max-width: 100%;
+  max-height: 256px;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
 
-  .gif-wrapper .gif-item video {
-    max-width: 100%;
-    max-height: 256px;
-    height: auto;
-    border-radius: 4px;
-    display: block;
+.gif-wrapper .gif-item video,
+.gif-wrapper .gif-item-wrong video { /* Applied to both correct and wrong items */
+  max-width: 100%;
+  max-height: 256px;
+  height: auto;
+  border-radius: 4px;
+  display: block;
 }
