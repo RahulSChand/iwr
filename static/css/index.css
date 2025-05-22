@@ -238,7 +238,22 @@ body {
     /* Total gap for 5 items with 15px gap = 4 gaps * 15px = 60px. Per item contribution = 60px / 5 = 12px */
     max-width: calc(20% - 12px);
     box-sizing: border-box; /* Includes padding and border in the element's total width and height */
-    background-color: #f8f8f8; /* Light background for the item box */
+    background-color: #e7faed; /* Light background for the item box */
+    border-radius: 8px; /* Rounded corners for the item box */
+    padding: 10px; /* Padding around the GIF image within its box */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for the item box */
+    display: flex; /* Helps in centering the image if it's smaller than the padded box */
+    align-items: center; /* Vertically centers the image if it's smaller */
+    justify-content: center; /* Horizontally centers the image if it's smaller */
+  }
+
+  .gif-wrapper .gif-item-wrong {
+    flex: 1 1 150px; /* Flex-grow, flex-shrink, flex-basis. GIFs will try to be ~150px. Adjust basis. */
+    /* For 5 items, max-width is 20%. Subtract gap influence: (total_gap_width / num_items) */
+    /* Total gap for 5 items with 15px gap = 4 gaps * 15px = 60px. Per item contribution = 60px / 5 = 12px */
+    max-width: calc(20% - 12px);
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    background-color: #edc9c9; /* Light background for the item box */
     border-radius: 8px; /* Rounded corners for the item box */
     padding: 10px; /* Padding around the GIF image within its box */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for the item box */
