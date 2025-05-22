@@ -114,6 +114,13 @@ body {
   overflow: hidden;
 }
 
+.publication-caption {
+    font-size: 0.9em; /* Adjust as needed */
+    color: #555; /* Adjust as needed */
+    text-align: center; /* Or left, right */
+    margin-top: 8px; /* Space between image and caption */
+  }
+
 .results-carousel .item {
   margin: 5px;
   overflow: hidden;
@@ -154,4 +161,106 @@ body {
 }
 #interpolation-image-wrapper img {
   border-radius: 5px;
+}
+
+.publication-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: cover; /* Adjust as needed, e.g., 'contain', 'fill' */
+}
+
+/* Main container for the row of videos */
+.video-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+  justify-content: center; /* Center items if they don't fill the whole row */
+  gap: 20px; /* Space between video items, adjust as needed */
+  padding: 10px 0; /* Some vertical padding for the section */
+}
+
+/* Individual video item container */
+.video-wrapper .video-item {
+  flex: 1 1 280px; /* Flex-grow, flex-shrink, flex-basis. Items will try to be ~280px wide, but can grow or shrink. */
+  max-width: calc(33.333% - 14px); /* Adjusts for 3 items per row with a 20px gap. (20px gap * 2 gaps) / 3 items = ~13.33px subtracted per item. */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: center; /* Center the video and caption text */
+  background-color: #f8f8f8; /* Light background, similar to .interpolation-panel */
+  border-radius: 10px; /* Consistent with .publication-video, .results-carousel .item */
+  padding: 15px; /* Padding around the video and caption */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for a bit of depth */
+  display: flex; /* Using flex to easily manage video and caption stacking */
+  flex-direction: column; /* Stack video and caption vertically */
+  align-items: center; /* Center video and caption horizontally within the item */
+}
+
+/* Styling for the <video> element itself */
+.video-wrapper .video-item video {
+  width: 100%; /* Video takes full width of its .video-item container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 6px; /* Slightly smaller rounded corners for the video player */
+  display: block; /* Remove any bottom spacing */
+  margin-bottom: 10px; /* Space between video and caption */
+}
+
+/* Styling for the video caption */
+.video-wrapper .video-item .video-caption {
+  font-size: 0.9rem; /* Relative font size */
+  color: #333; /* Dark grey for text, adjust as needed */
+  font-weight: 600; /* Slightly bolder, similar to the effect of <b> */
+  line-height: 1.4;
+  margin-top: auto; /* Pushes caption to the bottom if items have varying heights */
+}
+
+/* Optional: Styling for the overall video section title if you use it */
+.video-container > .video-title { /* Assuming .video-container is parent of .video-wrapper and the h4 title */
+  text-align: center;
+  margin-bottom: 20px; /* Space below the title */
+  font-size: 1.5rem; /* Larger font size for a section title */
+  font-weight: bold;
+  font-family: 'Google Sans', sans-serif; /* Consistent with .publication-title */
+}
+
+/* Main container for the HORIZONTAL row of GIFs */
+.gif-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allows GIFs to wrap to the next line on very small screens if needed */
+    justify-content: center; /* Centers the row of GIFs if they don't fill the full width */
+    gap: 15px; /* Space between each GIF item. Adjust as needed. */
+    padding: 2px 0; /* Vertical padding for the section */
+  }
+  
+  /* Individual GIF item container in the HORIZONTAL row */
+  .gif-wrapper .gif-item {
+    flex: 1 1 150px; /* Flex-grow, flex-shrink, flex-basis. GIFs will try to be ~150px. Adjust basis. */
+    /* For 5 items, max-width is 20%. Subtract gap influence: (total_gap_width / num_items) */
+    /* Total gap for 5 items with 15px gap = 4 gaps * 15px = 60px. Per item contribution = 60px / 5 = 12px */
+    max-width: calc(20% - 12px);
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    background-color: #f8f8f8; /* Light background for the item box */
+    border-radius: 8px; /* Rounded corners for the item box */
+    padding: 10px; /* Padding around the GIF image within its box */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow for the item box */
+    display: flex; /* Helps in centering the image if it's smaller than the padded box */
+    align-items: center; /* Vertically centers the image if it's smaller */
+    justify-content: center; /* Horizontally centers the image if it's smaller */
+  }
+  
+  /* Styling for the <img> (GIF) element itself */
+  .gif-wrapper .gif-item img {
+    max-width: 100%;        /* GIF is responsive within its .gif-item container's padding */
+    max-height: 256px;      /* Your requested max height for the GIF */
+    height: auto;           /* Maintain aspect ratio */
+    border-radius: 4px;     /* Slightly rounded corners for the GIF image itself */
+    display: block;         /* Good practice for images */
+    
+  }
+
+  .gif-wrapper .gif-item video {
+    max-width: 100%;
+    max-height: 256px;
+    height: auto;
+    border-radius: 4px;
+    display: block;
 }
