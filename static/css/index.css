@@ -117,7 +117,7 @@ body {
 .publication-caption {
     font-size: 0.9em; /* Adjust as needed */
     color: #555; /* Adjust as needed */
-    text-align: center; /* Or left, right */
+    text-align: left !important; /* Or left, right */
     margin-top: 8px; /* Space between image and caption */
   }
 
@@ -171,6 +171,16 @@ body {
     object-fit: cover; /* Adjust as needed, e.g., 'contain', 'fill' */
 }
 
+.publication-gif {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    object-fit: contain; /* Better for GIFs to maintain aspect ratio */
+    max-width: 100%;
+    margin: 0 auto; /* Center the GIF */
+}
+
 /* Main container for the row of videos */
 .video-wrapper {
   display: flex;
@@ -215,6 +225,57 @@ body {
 
 /* Optional: Styling for the overall video section title if you use it */
 .video-container > .video-title { /* Assuming .video-container is parent of .video-wrapper and the h4 title */
+  text-align: center;
+  margin-bottom: 20px; /* Space below the title */
+  font-size: 1.5rem; /* Larger font size for a section title */
+  font-weight: bold;
+  font-family: 'Google Sans', sans-serif; /* Consistent with .publication-title */
+}
+
+/* Main container for the row of GIFs */
+.gif-wrapper-3 {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap to the next line on smaller screens */
+  justify-content: center; /* Center items if they don't fill the whole row */
+  gap: 20px; /* Space between gif items, adjust as needed */
+  padding: 10px 0; /* Some vertical padding for the section */
+}
+
+/* Individual gif item container */
+.gif-wrapper-3 .gif-item {
+  flex: 1 1 280px; /* Flex-grow, flex-shrink, flex-basis. Items will try to be ~280px wide, but can grow or shrink. */
+  max-width: calc(33.333% - 14px); /* Adjusts for 3 items per row with a 20px gap. (20px gap * 2 gaps) / 3 items = ~13.33px subtracted per item. */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  text-align: center; /* Center the gif and caption text */
+  background-color: #f8f8f8; /* Light background, similar to .interpolation-panel */
+  border-radius: 10px; /* Consistent with .publication-video, .results-carousel .item */
+  padding: 15px; /* Padding around the gif and caption */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for a bit of depth */
+  display: flex; /* Using flex to easily manage gif and caption stacking */
+  flex-direction: column; /* Stack gif and caption vertically */
+  align-items: center; /* Center gif and caption horizontally within the item */
+}
+
+/* Styling for the <img> (GIF) element itself */
+.gif-wrapper-3 .gif-item img {
+  width: 100%; /* GIF takes full width of its .gif-item container */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 6px; /* Slightly smaller rounded corners for the gif */
+  display: block; /* Remove any bottom spacing */
+  margin-bottom: 10px; /* Space between gif and caption */
+}
+
+/* Styling for the gif caption */
+.gif-wrapper-3 .gif-item .video-caption {
+  font-size: 0.9rem; /* Relative font size */
+  color: #333; /* Dark grey for text, adjust as needed */
+  font-weight: 600; /* Slightly bolder, similar to the effect of <b> */
+  line-height: 1.4;
+  margin-top: auto; /* Pushes caption to the bottom if items have varying heights */
+}
+
+/* Optional: Styling for the overall gif section title if you use it */
+.gif-container > .gif-title { /* Assuming .gif-container is parent of .gif-wrapper-3 and the h4 title */
   text-align: center;
   margin-bottom: 20px; /* Space below the title */
   font-size: 1.5rem; /* Larger font size for a section title */

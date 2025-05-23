@@ -135,13 +135,33 @@
     <!-- Abstract. -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                 
+              <div class="publication-gif">
+                  <figure>
+                    <img src="./static/gifs/final.gif" alt="Method Figure" width="100%">
+                    <figcaption class="publication-caption">
+                        <p style="text-align: center;""> Our method consists of three main steps: </p>
+                        <p>(A) Learning a latent space to encode state-action pairs. </p> 
+                        <p>(B) Estimating a probability distribution over the target and prior data, and using <strong>importance weights</strong> for data retrieval. </p>
+                        <p> (C) Co-training on the target data and retrieved prior data.</p> 
+                            
+                        <p style="margin-top: 10px;">By augmenting the high-quality but much smaller target dataset with diverse, relevant prior samples, we learn more robust and performant policies. </p>
+
+                        </figcaption>
+                  </figure>
+                </div>
+            </div>
+          </div>
+
+          <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            While large-scale robot datasets have propelled recent progress in imitation learning, learning from smaller task specific datasets remains critical for deployment in new environments and unseen tasks. One such approach to few-shot imitation learning is retrieval-based imitation learning, which extracts relevant samples from large, widely available prior datasets to augment a limited demonstration dataset. To determine the relevant data from prior datasets, retrieval-based approaches most commonly calculate a prior data point's minimum distance to a point in the target dataset in latent space. While retrieval-based methods have shown success using this metric for data selection, we demonstrate its equivalence to the limit of a Gaussian kernel density (KDE) estimate of the target data distribution. This reveals two shortcomings of the retrieval rule used in prior work. First, it relies on high-variance nearest neighbor estimates that are susceptible to noise. Second, it does not account for the distribution of prior data when retrieving data. 
+            While large-scale robot datasets have propelled recent progress in imitation learning, learning from smaller task specific datasets remains critical for deployment in new environments. Retrieval-based imitation learning addresses this by extracting relevant samples from large, widely available prior datasets to augment a limited demonstration dataset. To determine the relevant retrieval-based approaches commonly calculate a prior data point's minimum distance to a point in the target dataset in latent space. While retrieval-based methods have shown success using this metric for data selection, it has two shortcomings. First, it relies on high-variance nearest neighbor estimates that are susceptible to noise. Second, it does not account for the distribution of prior data when retrieving data. 
         </p>
         <p>
-            To address these issues, we introduce <strong>Importance Weighted Retrieval (IWR)</strong>, which estimates importance weights, or the ratio between the target and prior data distributions for retrieval, using Gaussian KDEs. By considering the probability ratio, IWR overcomes the bias of previous selection rules, and by using reasonable modeling parameters, IWR effectively smooths estimates using all data points.  Across both simulation environments and real-world evaluations on the Bridge dataset we find that our method, IWR, consistently improves performance of existing retrieval-based methods, despite only requiring minor modifications.
+            To address these issues, we introduce <strong>Importance Weighted Retrieval (IWR)</strong>, which estimates importance weights, or the ratio between the target and prior data distributions for retrieval, using Gaussian KDEs. By considering the probability ratio, IWR overcomes the bias of previous selection rules, and by using reasonable modeling parameters, IWR effectively smooths estimates using all data points.  Across both simulation and real-world evaluations on the Bridge dataset, IWR consistently improves performance of existing retrieval-based methods, despite only requiring minor modifications.
           </p>
         </div>
       </div>
@@ -149,7 +169,7 @@
     <!--/ Abstract. -->
 
     <!-- Paper video. -->
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <div class="publication-image">
             <figure>
@@ -158,7 +178,7 @@
             </figure>
           </div>
       </div>
-    </div>
+    </div> -->
     <!--/ Paper video. -->
   </div>
 </section>
@@ -313,20 +333,60 @@
                             </div>
                           </div>
                     </div>
+                    
+                    <!-- Additional Video Rollouts within the same section -->
+                    <div style="margin-top: 30px;">
+                        <h2 class="title is-3 has-text-centered">Data Retrieval Visualization</h2>
+
+                        <div class="content">
+                            <div class="video-container">
+                                <h4 class="title is-6"><p>Mug-Mug task (put the white mug on the left plate and put the yellow and white mug on the right plate)
+                                </p> <p>IRW gets (1) a higher portion of directly relevant tasks and (2) retrieves a more balanced distribution across timesteps.</p> </h4>
+                                <div class="gif-wrapper-3">
+                                    <div class="gif-item">
+                                        <img src="./static/gifs/mug_mug_demo_0.gif">
+                                        <span class="video-caption">Target Demo</span>
+                                    </div>
+                                    <div class="gif-item">
+                                        <img src="./static/gifs/frame_gifs/frame_16_is_mug_mug_v1.gif">
+                                        <span class="video-caption">IWR retrieved samples from prior</span>
+                                    </div>
+                                    <div class="gif-item">
+                                        <img src="./static/gifs/frame_gifs/frame_16_br_mug_mug_v1.gif">
+                                        <span class="video-caption">BR retrieved samples from prior</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="publication-image">
+                            <figure>
+                              <img src="./static/images/compare_plot.png" alt="Method Figure" width="100%">
+                              <figcaption class="publication-caption">
+                                <strong>Figure: </strong>Difference in retrieval distributions between BR and IWR for the Mug-Pudding task in terms of both tasks (left) and timesteps (right). 
+                                BR faces two challenges: (1) object similarity across tasks results in retrieval of irrelevant demonstrations, and (2) tasks often share similar starting configurations, which bias retrieval towards initial samples instead of more informative later-stage actions. 
+                                IWR addresses these limitations by upweighting samples containing underrepresented objects or occurring later in the demonstrations.
+                                  </figcaption>
+                            </figure>
+                          </div>
+
+                        
         </div>
 </section>
-<div class="container is-max-desktop">
-        
-    <h2 class="title is-3 has-text-centered">Results</h2>
 
-    <div class="publication-image">
-        <figure>
-          <img src="./static/images/main_results.png" alt="Method Figure" width="100%">
-          
-        </figure>
+<!-- Results section -->
+<section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Results</h2>
+
+        <div class="publication-image">
+            <figure>
+              <img src="./static/images/main_results.png" alt="Method Figure" width="100%">
+              
+            </figure>
+        </div>
     </div>
-
-
+</section>
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
